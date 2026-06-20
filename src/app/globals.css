@@ -1,26 +1,137 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --surface: #0A0A0A;
+  --border: #161616;
+  --foreground: #FFFFFF;
+  --foreground-muted: #8A8A8A;
+  --accent: #D4AF37;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #000000;
+  color: #FFFFFF;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+}
+
+/* Hide scrollbars */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Custom scrollbar for main content */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #161616; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #8A8A8A; }
+
+/* Smooth scroll */
+html { scroll-behavior: smooth; }
+
+/* Selection */
+::selection { background: rgba(255,255,255,0.15); color: #FFFFFF; }
+
+/* Input overrides for dark theme */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+/* Animations */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #0A0A0A 25%, #161616 50%, #0A0A0A 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(212,175,55,0.15); }
+  50% { box-shadow: 0 0 40px rgba(212,175,55,0.3); }
+}
+
+.rank-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+/* Page transition fade */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page-enter { animation: fadeIn 0.4s ease-out; }
+
+/* Cinematic Background Animations */
+@keyframes film-grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+.bg-film-grain {
+  position: absolute;
+  top: -50%; left: -50%; right: -50%; bottom: -50%;
+  width: 200%; height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  animation: film-grain 8s steps(10) infinite;
+}
+
+@keyframes camera-pan {
+  0% { transform: scale(1) translate(0, 0); }
+  25% { transform: scale(1.05) translate(2%, 2%); }
+  50% { transform: scale(1.1) translate(-1%, 3%); }
+  75% { transform: scale(1.05) translate(-2%, -1%); }
+  100% { transform: scale(1) translate(0, 0); }
+}
+
+.bg-camera-pan {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(20,20,20,1) 0%, rgba(0,0,0,1) 100%);
+  z-index: -2;
+}
+
+.camera-flare {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(212,175,55,0.03) 0%, transparent 60%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  animation: camera-pan 30s ease-in-out infinite alternate;
+}
+.camera-flare:nth-child(2) {
+  top: -20%; right: -20%;
+  background: radial-gradient(circle, rgba(138,138,138,0.03) 0%, transparent 60%);
+  animation-duration: 45s;
+  animation-direction: alternate-reverse;
 }

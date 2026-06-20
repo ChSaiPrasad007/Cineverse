@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CineVerse 🎬
 
-## Getting Started
+CineVerse is a modern, social movie and web-series tracking platform. It allows users to log their cinematic journey, discover new titles via the TMDB API, write personal journal entries, and follow friends to see their activity in real-time.
 
-First, run the development server:
+![CineVerse Dashboard](https://saicineverse.vercel.app/placeholder.svg)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Live Demo
+Check out the live production version here:
+👉 **[saicineverse.vercel.app](https://saicineverse.vercel.app/)**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Global Discovery:** Search for both movies and TV shows using real data provided by the TMDB (The Movie Database) API.
+- **Cinematic Journal:** Rate and review what you watch. Add detailed notes including your favorite scenes, characters, and quotes.
+- **Social Feed:** Follow friends and see a real-time feed of what they are watching and reviewing.
+- **Personal Passport:** Track your viewing stats (total movies, series, hours watched) on a beautifully animated profile page.
+- **Premium UI:** Built with Framer Motion and Tailwind CSS, the application features buttery-smooth interactive glow effects, staggered animations, and a cinematic panning background.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Technology Stack
 
-## Learn More
+- **Framework:** Next.js (App Router)
+- **Styling:** Tailwind CSS + Framer Motion
+- **Database:** PostgreSQL (hosted on Vercel)
+- **ORM:** Prisma
+- **Authentication:** NextAuth.js (Google OAuth)
+- **Deployment:** Vercel
 
-To learn more about Next.js, take a look at the following resources:
+## Local Development
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/ChSaiPrasad007/Cineverse.git
+   cd Cineverse
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. **Set up environment variables:**
+   Create a `.env` file in the root directory and add the following:
+   ```env
+   # TMDB API Key for fetching movie/TV data
+   TMDB_KEY="your_tmdb_api_key"
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   # PostgreSQL Connection URLs
+   DATABASE_URL="your_prisma_postgres_url"
+   POSTGRES_URL="your_prisma_postgres_url"
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   # NextAuth Setup
+   NEXTAUTH_URL="http://localhost:3000"
+   NEXTAUTH_SECRET="your_nextauth_secret"
+
+   # Google OAuth
+   GOOGLE_CLIENT_ID="your_google_client_id"
+   GOOGLE_CLIENT_SECRET="your_google_client_secret"
+   ```
+
+4. **Initialize the database:**
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   ```
+
+5. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+## Created By
+**Sai Prasad Cheriyala**  
+📧 chsaiprasad66@gmail.com
